@@ -1,0 +1,61 @@
+% !TeX spellcheck = en_US
+\documentclass[a4paper,fleqn,11pt]{article}
+
+%% Packages 
+
+% Styling TOC
+\usepackage{tocloft}
+\setlength\cftaftertoctitleskip{1cm}
+\usepackage[nottoc]{tocbibind}
+
+% Mathe Packages
+\usepackage{amsmath,amssymb,epsfig,amsthm,amsfonts,bbm,textcomp}
+\usepackage{blkarray}
+\newcommand{\matindex}[1]{\mbox{\scriptsize#1}}% Matrix index
+
+% Grafiken
+\usepackage[font=small,aboveskip=0pt,belowskip=0pt,labelfont=bf,textfont=bf]{caption}
+\captionsetup{justification=justified,singlelinecheck=false}
+\captionsetup[table]{labelsep=period}
+\def\captionab#1#2{\caption[#1]{#1. \normalfont\small{#2}}}
+\usepackage[section]{placeins}
+
+% Schrift
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+
+% Seiten Layout
+\usepackage{float} 				
+%\usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm,a4paper]{geometry}    
+%\usepackage[onehalfspacing]{setspace}
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,a4paper]{geometry}
+\usepackage[doublespacing]{setspace}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{authblk}
+\setlength{\parindent}{0pt}
+\usepackage{pdflscape}
+
+% Fussnoten
+\usepackage[flushmargin,hang]{footmisc}
+\usepackage{listings}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+% Tabellen
+\usepackage{longtable} 			% Lange, mehrseitige Tabelle
+\usepackage{tabularx}
+\usepackage{array,hhline}
+\usepackage{booktabs}			% Linien zwischen Zeilen 
+\usepackage{multirow}			% Verknüpfte Zellen über Zeilen hinweg
+\usepackage{dcolumn}			% Erlaubt variable Orientierung am Decimalpunkt innerhalb einer Zelle
+\usepackage{rotating} % Drehung von Tabellen
+
+% References
+\usepackage{natbib}
+\bibliographystyle{apa}
+
+% Sonstiges
+\usepackage[colorinlistoftodos]{todonotes}
