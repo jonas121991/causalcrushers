@@ -42,21 +42,86 @@ Omitted variable bias $\Rightarrow$ control for all confounders, factors that de
 
 \section{Data Generation and Model Specification} \label{sec:data}
 
+In this experiment we consider a sample consisting of 10.000 observations. Each observation represents one individual agricultural household, indicated by the subscript $\textit{i}$. The outcome variable $\textit{harv}_i$ represents the amount harvested (kg) by individual $\textit{i}$. Our treatment $\textit{D}_i \in \{0,1\}$ is a binary variable that indicates whether individual $\textit{i}$ used the package of improved maize seeds and fertilizers or not. Therefore, $\textit{D}_i = 1$ means that the individual received the treatment and $\textit{D}_i = 0$ means no treatment. To control for other relevant variables, we collected the following covariates: $\textit{area}_i$ is the cultivated area with maize by farmer (m2), which is uniformely distributed between 100 and 5000 square meters. $\textit{sun}_i$ is the sun-hours during growing period (h), which is uniformly distributed between 400 and 600 hours. $\textit{rain}_i$ is the total rainfall during growing period (mm), which is uniformly distributed between 600 and 850 millimetres. $\textit{child}_i$ is the number of children under 10 years, which is uniformly distributed between 0 and 5. This is relevant since more children affect the time that can be spend on the field. $\textit{exp}_i$ is the years of experience and is uniformly distributed between 1 and 35 years. $\textit{educ}_i$ is a binary variable indicating whether individual \textit{i} is able to write and read ($\textit{educ}_i = 1$) or not ($\textit{educ}_i = 0$). \\
+%income endogeneity problem?!
+%include married or partner/single and interaction term with children
+
+
+Amount harvested (kg):  $\textit{harv}_i \sim$ U(30, 800)  \\
+Cultivated area with maize (m2): $\textit{area}_i \sim$ U(100, 5000) \\
+Sun-hours during growing period (h): $\textit{sun}_i \sim$ U(400, 600) \\
+total rainfall during growing period (mm): $\textit{rain}_i \sim$ U(600, 850) \\
+Number of children under 10 years: $\textit{child}_i \sim$ U(0, 5)  \todo{$\Rightarrow$ Idea: more children influence the time, which can be spend on the field to look after the plants; can change in both direction in 5.)} \\
+Years of experiences: $\textit{exp}_i \sim$ U(1, 35) \todo{$\Rightarrow$ increases in 5.)} \\
+Education: $\textit{educ}_i \sim$ U\{0,1\}, where 1 is good and 0 bad reading and writing skills \\
+Distance to the supply stations of a household (km): $\textit{dist}_i \sim$ U(1, 100) \\
+
+In the following analysis we want to estimate the causal effect of the treatment on the outcome variable as described in the following equation: 
 \begin{align}
 	\label{eq:eq1}
-	\textit{harv}_i &= \boldsymbol{\beta}_0 + \boldsymbol{\beta}_1 \textit{area}_i + \boldsymbol{\beta}_2 \textit{rain}_i - \boldsymbol{\beta}_4 \textit{child}_i + \boldsymbol{\beta}_5 \textit{exp}_i + \boldsymbol{\Delta}_i \textit{D}_i + \textit{e}_i.
+	\textit{Y}_i &= \boldsymbol{\mu}(0) + \boldsymbol{\Delta}_i \textit{D}_i + \textit{U}_i(0),
 \end{align}
 
-Amount harvested (kg)  $\sim$ U(30, 800)  \\
-Cultivated area with maize (m2) $\sim$ U(100, 5000) \\
-Sun-hours during growing period (h) $\sim$ U(400, 600) \\
-total rainfall during growing period (mm) $\sim$ U(600, 850) \\
-Number of children under 10 years $\sim$ U(1, 5)  $\Rightarrow$ Idea: more children influence the time, which can be spend on the field to look after the plants; can change in both direction in 5.) \\
-Years of experiences $\sim$ U(1, 35) $\Rightarrow$ increases in 5.) \\
-Education $\sim$ U\{0,1\}, where 1 is good and 0 bad reading and writing skills \\
+where $\textit{Y}_i$ is the outcome by individual, $\boldsymbol{\mu}(0) = \textit{Y}_i(0)$ is the outcome by individual without treatment and $\boldsymbol{\Delta}_i$ is the causal effect of the treatment  for individual \textit{i}.
+
+\begin{equation}
+  \begin{aligned}
+	\label{eq:eq1}
+	\boldsymbol{\Delta}_i &= \textit{Y}_i(1) - \textit{Y}_i(0) \\
+						 &= [\boldsymbol{\mu}(1)- \boldsymbol{\mu}(0)] + [\textit{U}_i(1)-\textit{U}_i(0)] \\
+						 &= \boldsymbol{E} \{ \boldsymbol{\Delta}_i \} + [\textit{U}_i(1)-\textit{U}_i(0)],
+  \end{aligned}
+\end{equation}
+  
+
+represents the causal effect of treatment for individual \textit{i}, which is composed of the common gain and the idiosyncratic gain. As indicated by Rubin(1970?) these potential outcomes by individual \textit{i} according to treatment can only be interpreted as causal effect, if the assignment between treatment and no treatment is random and there arises no selection bias such that we can compare outcomes of treated and untreated individuals with same characteristics as unobserved counterfactual. If we use this model in a regression we receive the following causal equation
+
+\begin{equation}
+  \begin{aligned}
+	\label{eq:eq1}
+	\textit{Y}_i &= \boldsymbol{\mu}(0) + \boldsymbol{E} \{ \boldsymbol{\Delta}_i \} \textit{D}_i + \textit{U}_i(0) + \boldsymbol{\Delta}_i[\textit{U}_i(1)-\textit{U}_i(0)] \\
+				 &= \boldsymbol{\mu}(0) + \boldsymbol{\beta} \textit{D}_i + \boldsymbol{\epsilon}_i,
+  \end{aligned}
+\end{equation}
+  
+which only holds if $\boldsymbol{E}\{\textit{D}_i\boldsymbol{\epsilon}_i\} \neq 0$, therefore we do not have exogeneity. Assuming we could observe all relevant covariates our regression would look the following
+
+\begin{align}
+	\label{eq:eq1}
+	\textit{harv}_i &= \boldsymbol{\beta}_0 + \boldsymbol{\beta}_1 \textit{area}_i + \boldsymbol{\beta}_2 \textit{sun}_i + \boldsymbol{\beta}_3 \textit{rain}_i - \boldsymbol{\beta}_4 \textit{child}_i + \boldsymbol{\beta}_5 \textit{exp}_i + \boldsymbol{\Delta}_i \textit{D}_i + \textit{e}_i.
+\end{align}
+
+However, we expect that e.g. the distance to the supply stations of a household, the education (as read/write dummy) or number of very young children (< 10 years) influences the choice to pick up the package and that the selection of treatment is therefore not random. Unobserved: Soil quality, topographic information OVB
+
+For this reason, we follow an alternative instrument variable approach following 
+
+\begin{align}
+	\label{eq:eq1}
+	\textit{D}_i^\ast &= \boldsymbol{\alpha} + \boldsymbol{\beta} \textit{Z}_i + \textit{V}_i.
+\end{align}
+
+As instrument variable we use the random assignment to receive a voucher to pick up the seed + fertilizer package. $\textit{vouch}_i$ is a binary variable indicating whether individual \textit{i}received a voucher ($\textit{vouch}_i = 1$) or not ($\textit{vouch}_i = 0$). This results in the equation
+
+\begin{align}
+	\label{eq:eq1}
+	\textit{D}_i^\ast &= \boldsymbol{\alpha} + \boldsymbol{\beta} \textit{vouch}_i + \textit{V}_i.
+\end{align}
+
+This random assignment of the voucher is correlated with treatment, since we expect a positive share of individuals receiving the voucher will pick up the package and only individuals receiving the voucher are allowed to pick up the package. Furthermore, the instrument is correlated with the outcome variable, since receiving the treatment should have an effect on output. Finally, the instrument is uncorrelated with the error term $\boldsymbol{\epsilon}_i$ since the assignment of receiving the voucher is randomly picked. As a result, the following holds
+
+\begin{align}
+	\label{eq:eq1}
+	\boldsymbol{E}\{\textit{U}_i(1)\} = \boldsymbol{E}\{\textit{U}_i(0)\} = \boldsymbol{E}\{\textit{V}_i(1)\} = 0.
+\end{align}
+
 
 
 \section{Assignment into Treatment} \label{sec:assignment}
+
+\begin{enumerate}
+\item Two different assignments into treatment
+
+Keeping the idiosyncratic treatment effect $\boldsymbol{\Delta}_i$ fixed, the assignment of individuals into treatment can play a major role in causal inference. Therefore, we need to discuss different cases. In the optimal case we would like to observe a random assignment into treatment. In that case we would observe that characteristics of treated and untreated individuals are balanced. The equation would look like following:
 
 $\textit{D}_i^\ast$ $\sim$ U(-1, 1)
 
@@ -83,8 +148,33 @@ $\textit{D}_i^\ast$ $\sim$ U(-1, 1)
     \end{cases}       
 \end{align*}
 
- 
+
+
+However, there are several reason, why the assignment into treatment could be not random. For example, ... . This leads to unbalanced characteristics of treated and untreated individuals. 
 Education (can read/write) $\sim$ U(1, 0) $\Rightarrow$ is supposed to have an influence on farmers evaluation regarding the effectiveness / advantage of improved seeds + fertilizer package.
+
+
+\item Descriptive statistics of raw data
+
+In the following table the mean values of the outcome and the covariates of the simulated raw data are illustrated by treatment status (treated and untreated) and assignment mechanism (random and self-selection). %Statistical test! Report p-values!
+
+% insert table
+
+\item Model estimation
+
+At this point we assume that we know the data generating process for the two assignment cases (random and self-selection). In the case of random assignment we obtain the following regression:
+
+% insert regression
+
+In the case of the self-selection we obtain the following regression:
+
+% insert regression
+
+% Discuss sign and bias in the self-selection case.
+
+
+\end{enumerate}
+
 
 
 \section{Selection Bias} \label{sec:selection}
