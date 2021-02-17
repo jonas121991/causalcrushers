@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7) (preloaded format=pdflatex 2020.10.14)  11 FEB 2021 16:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7) (preloaded format=pdflatex 2020.10.14)  17 FEB 2021 15:27
 entering extended mode
 **./assignment_text.tex
 (assignment_text.tex
@@ -614,14 +614,17 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 \rot@float@box=\box62
 \rot@mess@toks=\toks39
 )
-(C:\Users\kphilipp\AppData\Roaming\MiKTeX\tex/latex/natbib\natbib.sty
+(C:\Users\kphilipp\AppData\Roaming\MiKTeX\tex/latex/threeparttable\threeparttab
+le.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box63
+) (C:\Users\kphilipp\AppData\Roaming\MiKTeX\tex/latex/natbib\natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip100
 \bibsep=\skip101
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count303
-))
-(C:\Users\kphilipp\AppData\Roaming\MiKTeX\tex/latex/todonotes\todonotes.sty
+)) (C:\Users\kphilipp\AppData\Roaming\MiKTeX\tex/latex/todonotes\todonotes.sty
 Package: todonotes 2020/08/18 v1.1.3 Todonotes source and documentation.
 Package: todonotes 2018/11/22
 
@@ -664,7 +667,7 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 
 ("C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-common-lists.tex"))
 ("C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def"
-\pgfutil@abb=\box63
+\pgfutil@abb=\box64
 
 ("C:\Program Files\MiKTeX\tex/latex/ms\everyshi.sty"
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
@@ -734,7 +737,7 @@ Package: pgfcore 2020/01/08 v3.1.5b (3.1.5b)
 ("C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex"
 \pgfmath@dimen=\dimen271
 \pgfmath@count=\count312
-\pgfmath@box=\box64
+\pgfmath@box=\box65
 \pgfmath@toks=\toks49
 \pgfmath@stack@operand=\toks50
 \pgfmath@stack@operation=\toks51
@@ -787,9 +790,9 @@ File: pgfcorepathusage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@shorten@start@additional=\dimen289
 ) ("C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex"
 File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfpic=\box65
-\pgf@hbox=\box66
-\pgf@layerbox@main=\box67
+\pgfpic=\box66
+\pgf@hbox=\box67
+\pgf@layerbox@main=\box68
 \pgf@picture@serial@count=\count314
 )
 ("C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.t
@@ -829,7 +832,7 @@ File: pgfcoreimage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
 ("C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex"
 File: pgfcoreexternal.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfexternal@startupbox=\box68
+\pgfexternal@startupbox=\box69
 )) ("C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex"
 File: pgfcorelayers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
@@ -844,7 +847,7 @@ File: pgfcorerdf.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )))
 ("C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex"
 File: pgfmoduleshapes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfnodeparttextbox=\box69
+\pgfnodeparttextbox=\box70
 )
 ("C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex"
 File: pgfmoduleplot.code.tex 2020/01/08 v3.1.5b (3.1.5b)
@@ -887,10 +890,10 @@ File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \tikz@lastmovetoy=\dimen306
 \tikzleveldistance=\dimen307
 \tikzsiblingdistance=\dimen308
-\tikz@figbox=\box70
-\tikz@figbox@bg=\box71
-\tikz@tempbox=\box72
-\tikz@tempbox@bg=\box73
+\tikz@figbox=\box71
+\tikz@figbox@bg=\box72
+\tikz@tempbox=\box73
+\tikz@tempbox@bg=\box74
 \tikztreelevel=\count318
 \tikznumberofchildren=\count319
 \tikznumberofcurrentchild=\count320
@@ -940,12 +943,9 @@ LaTeX Info: Redefining \addtolength on input line 81.
 ("C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def"
 File: l3backend-pdftex.def 2020-09-01 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count330
-\l__pdf_internal_box=\box74
+\l__pdf_internal_box=\box75
 )
 (assignment_text.aux
-
-LaTeX Warning: Label `eq:eq1' multiply defined.
-
 
 LaTeX Warning: Label `eq:eq1' multiply defined.
 
@@ -992,7 +992,7 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count331
 \scratchdimen=\dimen311
-\scratchbox=\box75
+\scratchbox=\box76
 \nofMPsegments=\count332
 \nofMParguments=\count333
 \everyMPshowfont=\toks54
@@ -1016,6 +1016,7 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 )
 Package caption Info: rotating package is loaded.
+Package caption Info: threeparttable package is loaded.
 Package caption Info: End \AtBeginDocument code.
 
 *geometry* driver: auto-detecting
@@ -1053,7 +1054,7 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count337
-\AtBeginShipoutBox=\box76
+\AtBeginShipoutBox=\box77
 Package hyperref Info: Link coloring OFF on input line 3.
 ("C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty"
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -1088,17 +1089,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--20
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 21--22
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 23--24
+Underfull \hbox (badness 10000) in paragraph at lines 24--25
 
  []
 
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 25.
+ine 26.
 [1
 
 
@@ -1109,53 +1110,53 @@ ine 25.
 \pgfsyspdfmark {pgfid4}{36773952}{17032378}
 \pgfsyspdfmark {pgfid5}{38395967}{16785204}
 ]
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
-9.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 4
+0.
  ("C:\Program Files\MiKTeX\tex/latex/lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-9.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4
+0.
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-39.
+40.
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-39.
+40.
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 39.
+(Font)              <10.95> on input line 40.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 39.
+(Font)              <8> on input line 40.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 39.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
+(Font)              <6> on input line 40.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 40.
 
 
 ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 39.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 40.
 
 
 ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 45--48
+Underfull \hbox (badness 10000) in paragraph at lines 46--49
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 50--58
+Underfull \hbox (badness 10000) in paragraph at lines 51--59
 
  []
 
@@ -1170,42 +1171,57 @@ LaTeX Warning: Marginpar on page 2 moved.
 \pgfsyspdfmark {pgfid14}{36773952}{7124961}
 \pgfsyspdfmark {pgfid15}{38395967}{6877787}
 ] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 189--190
+<../figures/density_total.pdf, id=83, 568.1225pt x 397.485pt>
+File: ../figures/density_total.pdf Graphic file (type pdf)
+<use ../figures/density_total.pdf>
+Package pdftex.def Info: ../figures/density_total.pdf  used on input line 187.
+(pdftex.def)             Requested size: 455.24411pt x 318.52216pt.
+<../figures/density_goups.pdf, id=84, 568.1225pt x 397.485pt>
+File: ../figures/density_goups.pdf Graphic file (type pdf)
+<use ../figures/density_goups.pdf>
+Package pdftex.def Info: ../figures/density_goups.pdf  used on input line 195.
+(pdftex.def)             Requested size: 455.24411pt x 318.52216pt.
+ [4] [5 <../figures/density_total.pdf> <../figures/density_goups.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 227--228
 
  []
 
-[4] (assignment_text.bbl) [5
+[6
+
+] (assignment_text.bbl) [7
 
 ]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 239.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 239.
+ (assignment_text.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 239.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 239.
 
-Package caption Warning: Unused \captionsetup[table] on input line 19.
-See the caption package documentation for explanation.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 201.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 201.
-(assignment_text.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 201.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 201.
-Package rerunfilecheck Info: File `assignment_text.out' has not changed.
-(rerunfilecheck)             Checksum: 6F6CFFCF498D878694A31A3D7721AC52;335.
+Package rerunfilecheck Warning: File `assignment_text.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
 
+Package rerunfilecheck Info: Checksums for `assignment_text.out':
+(rerunfilecheck)             Before: 70647391C2DC8795C06A36C35EF34966;181
+(rerunfilecheck)             After:  E3B5ED7F2E2154421FB15348C615FB6B;335.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 201.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 239.
  ) 
 Here is how much of TeX's memory you used:
- 23383 strings out of 481199
- 420021 string characters out of 2915339
- 701076 words of memory out of 3000000
- 38416 multiletter control sequences out of 15000+200000
- 610244 words of font info for 75 fonts, out of 3000000 for 9000
+ 23464 strings out of 481199
+ 421571 string characters out of 2915339
+ 702179 words of memory out of 3000000
+ 38484 multiletter control sequences out of 15000+200000
+ 613239 words of font info for 76 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  70i,20n,85p,1547b,910s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Files/M
-iKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips
-/lm/lm-rm.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Pro
-gram Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}<C:/Program Files/MiKTeX/fonts/t
+{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTe
+X/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/
+lm-mathsy.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program
+ Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Program Files/MiKTeX/fonts/t
 ype1/public/lm/lmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx12
 .pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Program File
 s/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/
@@ -1216,9 +1232,9 @@ lm/lmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Progra
 m Files/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX/fonts/
 type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8
 .pfb>
-Output written on assignment_text.pdf (5 pages, 207931 bytes).
+Output written on assignment_text.pdf (7 pages, 268070 bytes).
 PDF statistics:
- 163 PDF objects out of 1000 (max. 8388607)
- 30 named destinations out of 1000 (max. 500000)
- 157 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 190 PDF objects out of 1000 (max. 8388607)
+ 36 named destinations out of 1000 (max. 500000)
+ 143 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -18,6 +18,7 @@
 
 We examine the effect of a package of improved maize seeds and fertilizers on the harvested amount of maize of small-scale agricultural households. Maize is an important source of carbohydrates in the imaginary country, which we examine. The result of the study should evaluate if the package is manageable and effective with a limited amount of extension service and if it can help to improve the food self-supply situation of those households. \\
 
+
 The package of improved maize seeds and fertilizers can be picked up for free at several supply station throughout the research area. Agricultural households have been informed in person by a group of young students about the process and where they can pick up the package. The information was spread by considering a federal list of all agricultural households in the study area. The total number of agricultural households in the list was 10.000. 5.000 households were randomly picked and received a voucher to pick up the seed + fertilizer package. \\
 
 However, we observe that only a subgroup of agricultural households takes the treatment by picking up the seed + fertilizer package. We guess that e.g. the distance to the supply stations of a household, the education (as read/write dummy) or number of very young children (< 10 years) influences the choice to pick up the package and that the selection of treatment is therefore not random. \\
@@ -158,7 +159,44 @@ Education (can read/write) $\sim$ U(1, 0) $\Rightarrow$ is supposed to have an i
 
 In the following table the mean values of the outcome and the covariates of the simulated raw data are illustrated by treatment status (treated and untreated) and assignment mechanism (random and self-selection). %Statistical test! Report p-values!
 
-% insert table
+\begin{table}[ht]
+\centering
+\begin{threeparttable}
+\caption{Summary Statistics} \label{tab:data}
+\begin{tabular}{lrrrrr}
+  \hline
+  & &\multicolumn{2}{c}{Random Assignment} & \multicolumn{2}{c}{Self-Selection}\\
+ & Total & Treatment & No Treatment & Treatment & No Treatment \\
+ \hline
+harv & 815.69 & 942.59 & 784.74 & 1024.54 & 796.07 \\ 
+  area & 2551.96 & 2594.08 & 2541.69 & 2550.61 & 2552.66 \\ 
+  sun & 499.45 & 501.76 & 498.89 & 499.83 & 499.26 \\ 
+  rain & 724.72 & 723.98 & 724.89 & 725.17 & 724.48 \\ 
+  exp & 18.12 & 18.24 & 18.10 & 18.12 & 18.13 \\ 
+  dist & 50.28 & 50.40 & 50.25 & 47.77 & 51.57 \\ 
+  child & 2.51 & 2.55 & 2.50 & 1.91 & 2.82 \\ 
+  educ & 0.50 & 0.49 & 0.51 & 0.55 & 0.48 \\ 
+  Observations & 10000 & 1961 & 8039 & 3400 & 6600 \\ 
+   \hline
+\end{tabular}
+\end{threeparttable}
+\end{table}
+
+\begin{figure}[htb]
+\begin{raggedleft}
+\includegraphics[width=\linewidth]{../figures/density_total.pdf}
+\caption{Density function}
+\label{fig:density}
+\end{raggedleft}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{raggedleft}
+\includegraphics[width=\linewidth]{../figures/density_goups.pdf}
+\caption{Density function grouped by treatment}
+\label{fig:density_groups}
+\end{raggedleft}
+\end{figure}
 
 \item Model estimation
 
