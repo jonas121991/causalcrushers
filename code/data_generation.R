@@ -1,23 +1,26 @@
-# Data Generation
+#### Data Generation
 rm(list = ls())
 cat("\014")
 
-#packages
-library(extraDistr)
-library(sn)
-library(dplyr)
 
+# Settings ----------------------------------------------------------------
+
+#packages
+library(extraDistr) # for random distribution
+library(dplyr) # for table editing
+library(xtable) # for latex output
+library(ggplot2) # for nice plots
+library(ggpubr) # for putting multiple plots together in one window
 # Set seed for reproducibility
 set.seed(111)
 
 
-
 #  Variable generation ----------------------------------------------------
 
+# Number of observations/individuals
 n <- 10000
 
 # covariates
-harv <- runif(n,30,800)
 area <- runif(n,100,5000)
 sun <- runif(n,400,600)
 rain <- runif(n,600,850)
@@ -27,38 +30,22 @@ exp <- round(runif(n,1,35))
 vouch <- c(rep(1,n/2),rep(0,n/2)) # 50% of individuals receive a voucher
 
 # treatment variable
-treat <- c(rbinom(n=n/2, size=1, prob=0.80), rep(0,n/2)) # 80% of the individuals receiving a voucher decide to take the treatment
+treat <- c(rbinom(n=n/2, size=1, prob=0.40), rep(0,n/2)) # 80% of the individuals receiving a voucher decide to take the treatment
   
-# self-selection variables in random case
+# self-selection variables
 child <- round(runif(n,0,5))
 educ <- round(runif(n,0,1))
 dist <- runif(n,1,100)
 
-# self-selection variables in self-selection case
-child_sel <- rep(NA, n)
-educ_sel <- rep(NA, n)
-dist_sel <- rep(NA, n)
-
-#x= round(rbeta(1,2,5)*5) # right skewed: more small values
-#z= round(rbeta(1,5,2)*5) # left skewed: more large values
-
-for (i in 1:length(treat)){
-  if (treat[i] == 1){ # people who chose to take the treatment...
-    child_sel[i] <- round(rbeta(1,2,5)*5) # have less  children
-    educ_sel[i] <- round(rbeta(1,5,2)*1) # have higher education
-    dist_sel[i] <- rbeta(1,2,5)*100 # have lower distance
-  }else{
-    child_sel[i] <- round(runif(1,0,5))
-    educ_sel[i] <- round(runif(1,0,1))
-    dist_sel[i] <- runif(1,1,100)    
-  }
-}
-
-# treat_sel = ...
 
 # data table for random assignment ----------------------------------------
 
-data_table <- data.frame(harv,area,sun,rain,child,exp,educ,dist,vouch,treat)
+# create table
+data_table <- data.frame(area,sun,rain,exp,dist,child,educ,vouch,treat)
+
+data_table <- data_table %>%
+  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 5*exp - 20*child -2*child^2 + 100*educ - 5*dist + 100*treat + rnorm(1, mean=0, sd=1))
+
 
 ## summary statistics
 # overall
@@ -76,9 +63,46 @@ means_un <- data_table_un %>% summarise_if(is.numeric, mean, na.rm = TRUE)
 obs_un <- dim(data_table_un)[1]
 
 
-# data table for self-selection -------------------------------------------
+# Create self-selection case ----------------------------------------------
 
-data_table_sel <- data.frame(harv,area,sun,rain,child_sel,exp,educ_sel,dist_sel,vouch,treat)
+# Redefine table
+data_table_sel <- data_table
+
+### filter data set according to self-selection variables
+
+# Give higher probability for treatment if child, educ or dist are above/below average and lower otherwise
+data_table_sel <- data_table_sel %>%
+                    mutate(data_table_sel, treat = ifelse( 
+                      vouch == 1 & child < mean(child, na.rm = TRUE),
+                      rbinom(n=1, size=1, prob=0.6),
+                      ifelse(vouch == 1 & educ > mean(educ, na.rm = TRUE),
+                             rbinom(n=1, size=1, prob=0.6),
+                             ifelse(vouch == 1 & dist < mean(dist, na.rm = TRUE),
+                                    rbinom(n=1, size=1, prob=0.6),
+                      treat))))
+
+        
+# Give even higher probability for treatment if two of three conditions are fulfilled                    
+data_table_sel <- data_table_sel %>%
+  mutate(data_table_sel, treat = ifelse( 
+    vouch == 1 & ((child < mean(child, na.rm = TRUE) & educ > mean(educ, na.rm = TRUE)) |
+      (child < mean(child, na.rm = TRUE) & dist < mean(dist, na.rm = TRUE)) |
+      (educ > mean(educ, na.rm = TRUE) & dist < mean(dist, na.rm = TRUE))),
+    rbinom(n=1, size=1, prob=0.8), treat
+  ))
+
+# Give even higher probability for treatment if all three conditions are fulfilled                    
+data_table_sel <- data_table_sel %>%
+  mutate(data_table_sel, treat = ifelse( 
+    vouch == 1 & child < mean(child, na.rm = TRUE) &
+                    educ > mean(educ, na.rm = TRUE) &
+                    dist < mean(dist, na.rm = TRUE),
+    rbinom(n=1, size=1, prob=0.9), treat
+    ))
+
+# outcome variable
+data_table_sel <- data_table_sel %>%
+  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 1.5*exp - 2*child + 10*educ - 0.5*dist + 300*treat + rnorm(1, mean=0, sd=1))
 
 ## create summary statistics
 # treated
@@ -90,3 +114,69 @@ obs_sel_treat <- dim(data_table_sel_treat)[1]
 data_table_sel_un <- data_table_sel %>% filter(treat == 0)
 means_sel_un <- data_table_sel_un %>% summarise_if(is.numeric, mean, na.rm = TRUE)
 obs_sel_un <- dim(data_table_sel_un)[1]
+
+save(data_table,data_table_sel, file = "data/data.rda")
+
+
+# Create summary statistics table ----------------------------------------------------
+
+sum_table <- t(rbind(means,means_treat,means_un,means_sel_treat,means_sel_un))[1:(length(means)-2),]
+Observations <- c(obs,obs_treat,obs_un,obs_sel_treat,obs_sel_un)
+sum_table <- rbind(sum_table,Observations)
+colnames(sum_table) <- c("Total", "Treatment", "No Treatment", "Treatment", "No Treatment")
+
+# generate latex output
+addtorow <- list()
+addtorow$pos <- list(0, 0)
+addtorow$command <- c("& &\\multicolumn{2}{c}{Random Assignment} & \\multicolumn{2}{c}{Self-Selection}\\\\\n",
+                      "& Total & Treatment & No Treatment & Treatment & No Treatment \\\\\n")
+mdat <- matrix(c(rep(2,(8*6)),rep(0,6)),nrow = 9, ncol=6, byrow=TRUE)
+print(xtable(sum_table, align = c("l","r","r","r","r","r"), digits = mdat),
+      add.to.row = addtorow, include.colnames = FALSE)
+
+
+# Density plot ------------------------------------------------------------
+par(mfrow=c(2,1))
+# Histogram with density plot
+a <- ggplot(data_table, aes(x=harv)) + 
+  geom_histogram(aes(y=..density..), colour="black", fill="white")+
+  geom_density(alpha=.2, fill="#FF6666") +
+  scale_x_continuous(breaks = seq(000,1200,200), limits = c(000,1200)) +
+  scale_y_continuous(breaks = seq(0,0.007,0.001), limits = c(0,0.007))
+
+
+# Histogram with density plot
+b <- ggplot(data_table_sel, aes(x=harv)) + 
+  geom_histogram(aes(y=..density..), colour="black", fill="white")+
+  geom_density(alpha=.2, fill="#FF6666") +
+  scale_x_continuous(breaks = seq(000,1200,200), limits = c(000,1200)) +
+  scale_y_continuous(breaks = seq(0,0.007,0.001), limits = c(0,0.007))
+
+ggarrange(a, b, ncol = 1, nrow = 2, heights = c(2,2), align = "hv")
+ggsave("figures/density_total.pdf",width = 20, height = 14, units = "cm")
+
+# Color by groups
+data_table$treat <- factor(data_table$treat, 
+                           levels=c(1,0),
+                           labels=c("Treated","Not Treated"))
+data_table_sel$treat <- factor(data_table_sel$treat, 
+                           levels=c(1,0),
+                           labels=c("Treated","Not Treated"))
+
+
+c <- ggplot(data_table, aes(x=harv, color=treat, fill=treat)) + 
+  geom_histogram(aes(y=..density..), alpha=0.5, 
+                 position="identity")+
+  geom_density(alpha=.2) +
+  scale_x_continuous(breaks = seq(000,1400,200), limits = c(000,1400)) +
+  scale_y_continuous(breaks = seq(0,0.008,0.001), limits = c(0,0.008))
+
+d <- ggplot(data_table_sel, aes(x=harv, color=treat, fill=treat)) + 
+  geom_histogram(aes(y=..density..), alpha=0.5, 
+                 position="identity")+
+  geom_density(alpha=.2) +
+  scale_x_continuous(breaks = seq(000,1400,200), limits = c(000,1400)) +
+  scale_y_continuous(breaks = seq(0,0.008,0.001), limits = c(0,0.008))
+
+ggarrange(c, d, ncol = 1, nrow = 2, heights = c(2,2), align = "hv")
+ggsave("figures/density_goups.pdf",width = 20, height = 14, units = "cm")
