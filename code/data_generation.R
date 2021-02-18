@@ -30,7 +30,7 @@ exp <- round(runif(n,1,35))
 vouch <- c(rep(1,n/2),rep(0,n/2)) # 50% of individuals receive a voucher
 
 # treatment variable
-treat <- c(rbinom(n=n/2, size=1, prob=0.40), rep(0,n/2)) # 80% of the individuals receiving a voucher decide to take the treatment
+treat <- c(rbinom(n=n/2, size=1, prob=0.50), rep(0,n/2)) # 80% of the individuals receiving a voucher decide to take the treatment
   
 # self-selection variables
 child <- round(runif(n,0,5))
@@ -44,7 +44,7 @@ dist <- runif(n,1,100)
 data_table <- data.frame(area,sun,rain,exp,dist,child,educ,vouch,treat)
 
 data_table <- data_table %>%
-  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 5*exp - 20*child -2*child^2 + 100*educ - 5*dist + 100*treat + rnorm(1, mean=0, sd=1))
+  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 5*exp - 5*child + 10*educ - 0.5*dist + 100*treat + rnorm(1, mean=0, sd=1))
 
 
 ## summary statistics
@@ -88,7 +88,7 @@ data_table_sel <- data_table_sel %>%
     vouch == 1 & ((child < mean(child, na.rm = TRUE) & educ > mean(educ, na.rm = TRUE)) |
       (child < mean(child, na.rm = TRUE) & dist < mean(dist, na.rm = TRUE)) |
       (educ > mean(educ, na.rm = TRUE) & dist < mean(dist, na.rm = TRUE))),
-    rbinom(n=1, size=1, prob=0.8), treat
+    rbinom(n=1, size=1, prob=0.7), treat
   ))
 
 # Give even higher probability for treatment if all three conditions are fulfilled                    
@@ -102,7 +102,7 @@ data_table_sel <- data_table_sel %>%
 
 # outcome variable
 data_table_sel <- data_table_sel %>%
-  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 1.5*exp - 2*child + 10*educ - 0.5*dist + 300*treat + rnorm(1, mean=0, sd=1))
+  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 1.5*exp - 5*child + 100*educ - 1*dist + 300*treat + rnorm(1, mean=0, sd=1))
 
 ## create summary statistics
 # treated
@@ -142,7 +142,8 @@ a <- ggplot(data_table, aes(x=harv)) +
   geom_histogram(aes(y=..density..), colour="black", fill="white")+
   geom_density(alpha=.2, fill="#FF6666") +
   scale_x_continuous(breaks = seq(000,1200,200), limits = c(000,1200)) +
-  scale_y_continuous(breaks = seq(0,0.007,0.001), limits = c(0,0.007))
+  scale_y_continuous(breaks = seq(0,0.005,0.001), limits = c(0,0.005)) + 
+  ggtitle("Random Case")
 
 
 # Histogram with density plot
@@ -150,7 +151,8 @@ b <- ggplot(data_table_sel, aes(x=harv)) +
   geom_histogram(aes(y=..density..), colour="black", fill="white")+
   geom_density(alpha=.2, fill="#FF6666") +
   scale_x_continuous(breaks = seq(000,1200,200), limits = c(000,1200)) +
-  scale_y_continuous(breaks = seq(0,0.007,0.001), limits = c(0,0.007))
+  scale_y_continuous(breaks = seq(0,0.005,0.001), limits = c(0,0.005)) + 
+  ggtitle("Self-Selection Case")
 
 ggarrange(a, b, ncol = 1, nrow = 2, heights = c(2,2), align = "hv")
 ggsave("figures/density_total.pdf",width = 20, height = 14, units = "cm")
@@ -169,14 +171,16 @@ c <- ggplot(data_table, aes(x=harv, color=treat, fill=treat)) +
                  position="identity")+
   geom_density(alpha=.2) +
   scale_x_continuous(breaks = seq(000,1400,200), limits = c(000,1400)) +
-  scale_y_continuous(breaks = seq(0,0.008,0.001), limits = c(0,0.008))
+  scale_y_continuous(breaks = seq(0,0.005,0.001), limits = c(0,0.005)) + 
+  ggtitle("Random Case")
 
 d <- ggplot(data_table_sel, aes(x=harv, color=treat, fill=treat)) + 
   geom_histogram(aes(y=..density..), alpha=0.5, 
                  position="identity")+
   geom_density(alpha=.2) +
   scale_x_continuous(breaks = seq(000,1400,200), limits = c(000,1400)) +
-  scale_y_continuous(breaks = seq(0,0.008,0.001), limits = c(0,0.008))
+  scale_y_continuous(breaks = seq(0,0.005,0.001), limits = c(0,0.005)) + 
+  ggtitle("Self-Selection Case")
 
 ggarrange(c, d, ncol = 1, nrow = 2, heights = c(2,2), align = "hv")
 ggsave("figures/density_goups.pdf",width = 20, height = 14, units = "cm")
