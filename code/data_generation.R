@@ -30,7 +30,7 @@ exp <- round(runif(n,1,35))
 vouch <- c(rep(1,n/2),rep(0,n/2)) # 50% of individuals receive a voucher
 
 # treatment variable
-treat <- c(rbinom(n=n/2, size=1, prob=0.50), rep(0,n/2)) # 80% of the individuals receiving a voucher decide to take the treatment
+treat <- c(rbinom(n=n/2, size=1, prob=0.50), rep(0,n/2)) # 50% of the individuals receiving a voucher decide to take the treatment
   
 # self-selection variables
 child <- round(runif(n,0,5))
@@ -43,8 +43,9 @@ dist <- runif(n,1,100)
 # create table
 data_table <- data.frame(area,sun,rain,exp,dist,child,educ,vouch,treat)
 
+# output variable
 data_table <- data_table %>%
-  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 5*exp - 5*child + 10*educ - 0.5*dist + 100*treat + rnorm(1, mean=0, sd=1), .before = area)
+  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 5*exp - 5*child + 10*educ + 100*treat + rnorm(1, mean=0, sd=1), .before = area)
 
 
 ## summary statistics
@@ -68,41 +69,17 @@ obs_un <- dim(data_table_un)[1]
 # Redefine table
 data_table_sel <- data_table
 
-### filter data set according to self-selection variables
-
-# Give higher probability for treatment if child, educ or dist are above/below average and lower otherwise
+### define treatment according to self-selection variables
 data_table_sel <- data_table_sel %>%
-                    mutate(data_table_sel, treat = ifelse( 
-                      vouch == 1 & child < mean(child, na.rm = TRUE),
-                      rbinom(n=1, size=1, prob=0.6),
-                      ifelse(vouch == 1 & educ > mean(educ, na.rm = TRUE),
-                             rbinom(n=1, size=1, prob=0.6),
-                             ifelse(vouch == 1 & dist < mean(dist, na.rm = TRUE),
-                                    rbinom(n=1, size=1, prob=0.6),
-                      treat))))
+  mutate(treat = ifelse(1 - 0.4*child + 2*educ - 0.02*dist + rnorm(1, mean=0, sd=0.5) > 0,1,0))
 
-        
-# Give even higher probability for treatment if two of three conditions are fulfilled                    
+# those that did not receive a voucher still do not take the treatment
 data_table_sel <- data_table_sel %>%
-  mutate(data_table_sel, treat = ifelse( 
-    vouch == 1 & ((child < mean(child, na.rm = TRUE) & educ > mean(educ, na.rm = TRUE)) |
-      (child < mean(child, na.rm = TRUE) & dist < mean(dist, na.rm = TRUE)) |
-      (educ > mean(educ, na.rm = TRUE) & dist < mean(dist, na.rm = TRUE))),
-    rbinom(n=1, size=1, prob=0.7), treat
-  ))
+  mutate(treat = ifelse(vouch == 0,0,treat))
 
-# Give even higher probability for treatment if all three conditions are fulfilled                    
+# outcome variable  
 data_table_sel <- data_table_sel %>%
-  mutate(data_table_sel, treat = ifelse( 
-    vouch == 1 & child < mean(child, na.rm = TRUE) &
-                    educ > mean(educ, na.rm = TRUE) &
-                    dist < mean(dist, na.rm = TRUE),
-    rbinom(n=1, size=1, prob=0.9), treat
-    ))
-
-# outcome variable
-data_table_sel <- data_table_sel %>%
-  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 1.5*exp - 5*child + 100*educ - 1*dist + 300*treat + rnorm(1, mean=0, sd=1))
+  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 1.5*exp - 5*child + 100*educ + 300*treat + rnorm(1, mean=0, sd=1))
 
 ## create summary statistics
 # treated
@@ -118,22 +95,54 @@ obs_sel_un <- dim(data_table_sel_un)[1]
 save(data_table,data_table_sel, file = "data/data.rda")
 
 
-# Create summary statistics table ----------------------------------------------------
-Observations <- c(obs,obs_treat,obs_un,obs_sel_treat,obs_sel_un)
+# Linear Regression -------------------------------------------------------
 
-sum_table <- t(rbind(means,means_treat,means_un,means_sel_treat,means_sel_un))
+#regression for random case
+fit_random <- lm(harv ~ area + sun + rain + exp + child + treat, data = data_table)
+summary(fit_random)
+xtable(summary(fit_random)) # replace Pr... with: Pr({$>$}{$|$}t$|$) in the code
+
+# regression for self-selection case
+fit_sel <- lm(harv ~ area + sun + rain + exp + child + treat, data = data_table_sel)
+summary(fit_sel)
+xtable(summary(fit_sel)) # replace Pr... with: Pr({$>$}{$|$}t$|$) in the code
+
+
+# T-test for balanced covariates ------------------------------------------
+
+# p values for random case
+p_val_rand <- NA
+for (i in 2:length(data_table_treat)){
+  res <- t.test(data_table_treat[,i], data_table_un[,i] , alternative = "two.sided", var.equal = FALSE)
+  p_val_rand[i] <- res$p.value
+}
+
+
+# p-values for self-selection case
+p_val_sel <- NA
+for (i in 2:length(data_table_sel_treat)){
+  res <- t.test(data_table_sel_treat[,i], data_table_sel_un[,i] , alternative = "two.sided", var.equal = FALSE)
+  p_val_sel[i] <- res$p.value
+}
+
+
+
+# Create summary statistics table ----------------------------------------------------
+Obs <- c(obs,obs_treat,obs_un,NA,obs_sel_treat,obs_sel_un,NA)
+
+sum_table <- t(rbind(means,means_treat,means_un,p_val_rand,means_sel_treat,means_sel_un,p_val_sel))
 sum_table <- sum_table[1:(dim(sum_table)[1]-2),]
-sum_table <- rbind(sum_table,Observations)
+sum_table <- rbind(sum_table,Obs)
 sum_table <- data.frame(sum_table)
-colnames(sum_table) <- c("Total", "Treatment", "No Treatment", "Treatment", "No Treatment")
+colnames(sum_table) <- c("Total", "Treatment","No Treatment", "P-Value", "Treatment", "No Treatment", "P-Value")
 
 # generate latex output
 addtorow <- list()
 addtorow$pos <- list(0, 0)
-addtorow$command <- c("& &\\multicolumn{2}{c}{Random Assignment} & \\multicolumn{2}{c}{Self-Selection}\\\\\n",
-                      "& Total & Treatment & No Treatment & Treatment & No Treatment \\\\\n")
-mdat <- matrix(c(rep(2,(8*6)),rep(0,6)),nrow = 9, ncol=6, byrow=TRUE)
-print(xtable(sum_table, align = c("l","r","r","r","r","r"), digits = mdat),
+addtorow$command <- c("& &\\multicolumn{3}{c}{Random Assignment} & \\multicolumn{3}{c}{Self-Selection}\\\\\n",
+                      "& Total & Treatment & No Treatment & P-Value & Treatment & No Treatment & P-Value\\\\\n")
+mdat <- matrix(c(rep(2,(8*8)),rep(0,8)),nrow = 9, ncol=8, byrow=TRUE)
+print(xtable(sum_table, align = c("l","r","r","r","r","r","r","r"), digits = mdat),
       add.to.row = addtorow, include.colnames = FALSE)
 
 
