@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7) (preloaded format=pdflatex 2020.10.14)  17 FEB 2021 15:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7) (preloaded format=pdflatex 2020.10.14)  18 FEB 2021 10:01
 entering extended mode
 **./assignment_text.tex
 (assignment_text.tex
@@ -964,6 +964,9 @@ LaTeX Warning: Label `eq:eq1' multiply defined.
 
 LaTeX Warning: Label `eq:eq1' multiply defined.
 
+
+LaTeX Warning: Label `eq:eq1' multiply defined.
+
 )
 \openout1 = `assignment_text.aux'.
 
@@ -1171,12 +1174,12 @@ LaTeX Warning: Marginpar on page 2 moved.
 \pgfsyspdfmark {pgfid14}{36773952}{7124961}
 \pgfsyspdfmark {pgfid15}{38395967}{6877787}
 ] [3]
-<../figures/density_total.pdf, id=83, 568.1225pt x 397.485pt>
+<../figures/density_total.pdf, id=95, 568.1225pt x 397.485pt>
 File: ../figures/density_total.pdf Graphic file (type pdf)
 <use ../figures/density_total.pdf>
 Package pdftex.def Info: ../figures/density_total.pdf  used on input line 187.
 (pdftex.def)             Requested size: 455.24411pt x 318.52216pt.
-<../figures/density_goups.pdf, id=84, 568.1225pt x 397.485pt>
+<../figures/density_goups.pdf, id=96, 568.1225pt x 397.485pt>
 File: ../figures/density_goups.pdf Graphic file (type pdf)
 <use ../figures/density_goups.pdf>
 Package pdftex.def Info: ../figures/density_goups.pdf  used on input line 195.
@@ -1196,25 +1199,19 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 239.
  (assignment_text.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 239.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 239.
+Package rerunfilecheck Info: File `assignment_text.out' has not changed.
+(rerunfilecheck)             Checksum: E3B5ED7F2E2154421FB15348C615FB6B;335.
 
-
-Package rerunfilecheck Warning: File `assignment_text.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `assignment_text.out':
-(rerunfilecheck)             Before: 70647391C2DC8795C06A36C35EF34966;181
-(rerunfilecheck)             After:  E3B5ED7F2E2154421FB15348C615FB6B;335.
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 239.
  ) 
 Here is how much of TeX's memory you used:
- 23464 strings out of 481199
- 421571 string characters out of 2915339
- 702179 words of memory out of 3000000
- 38484 multiletter control sequences out of 15000+200000
+ 23467 strings out of 481199
+ 421605 string characters out of 2915339
+ 702412 words of memory out of 3000000
+ 38487 multiletter control sequences out of 15000+200000
  613239 words of font info for 76 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  70i,20n,85p,1547b,910s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1232,9 +1229,9 @@ lm/lmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Progra
 m Files/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX/fonts/
 type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8
 .pfb>
-Output written on assignment_text.pdf (7 pages, 268070 bytes).
+Output written on assignment_text.pdf (7 pages, 265482 bytes).
 PDF statistics:
- 190 PDF objects out of 1000 (max. 8388607)
+ 199 PDF objects out of 1000 (max. 8388607)
  36 named destinations out of 1000 (max. 500000)
- 143 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 167 words of extra memory for PDF output out of 10000 (max. 10000000)
 
