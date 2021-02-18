@@ -44,7 +44,7 @@ dist <- runif(n,1,100)
 data_table <- data.frame(area,sun,rain,exp,dist,child,educ,vouch,treat)
 
 data_table <- data_table %>%
-  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 5*exp - 5*child + 10*educ - 0.5*dist + 100*treat + rnorm(1, mean=0, sd=1))
+  mutate(harv = 400 + 0.05*area + 0.04*sun + 0.03*rain + 5*exp - 5*child + 10*educ - 0.5*dist + 100*treat + rnorm(1, mean=0, sd=1), .before = area)
 
 
 ## summary statistics
@@ -119,10 +119,12 @@ save(data_table,data_table_sel, file = "data/data.rda")
 
 
 # Create summary statistics table ----------------------------------------------------
-
-sum_table <- t(rbind(means,means_treat,means_un,means_sel_treat,means_sel_un))[1:(length(means)-2),]
 Observations <- c(obs,obs_treat,obs_un,obs_sel_treat,obs_sel_un)
+
+sum_table <- t(rbind(means,means_treat,means_un,means_sel_treat,means_sel_un))
+sum_table <- sum_table[1:(dim(sum_table)[1]-2),]
 sum_table <- rbind(sum_table,Observations)
+sum_table <- data.frame(sum_table)
 colnames(sum_table) <- c("Total", "Treatment", "No Treatment", "Treatment", "No Treatment")
 
 # generate latex output
@@ -137,7 +139,7 @@ print(xtable(sum_table, align = c("l","r","r","r","r","r"), digits = mdat),
 
 # Density plot ------------------------------------------------------------
 par(mfrow=c(2,1))
-# Histogram with density plot
+# Histogram with density plot for random case
 a <- ggplot(data_table, aes(x=harv)) + 
   geom_histogram(aes(y=..density..), colour="black", fill="white")+
   geom_density(alpha=.2, fill="#FF6666") +
@@ -146,7 +148,7 @@ a <- ggplot(data_table, aes(x=harv)) +
   ggtitle("Random Case")
 
 
-# Histogram with density plot
+# Histogram with density plot for self-selection case
 b <- ggplot(data_table_sel, aes(x=harv)) + 
   geom_histogram(aes(y=..density..), colour="black", fill="white")+
   geom_density(alpha=.2, fill="#FF6666") +
@@ -157,7 +159,7 @@ b <- ggplot(data_table_sel, aes(x=harv)) +
 ggarrange(a, b, ncol = 1, nrow = 2, heights = c(2,2), align = "hv")
 ggsave("figures/density_total.pdf",width = 20, height = 14, units = "cm")
 
-# Color by groups
+
 data_table$treat <- factor(data_table$treat, 
                            levels=c(1,0),
                            labels=c("Treated","Not Treated"))
@@ -165,7 +167,7 @@ data_table_sel$treat <- factor(data_table_sel$treat,
                            levels=c(1,0),
                            labels=c("Treated","Not Treated"))
 
-
+# Histogram with density plot for random case, color by groups
 c <- ggplot(data_table, aes(x=harv, color=treat, fill=treat)) + 
   geom_histogram(aes(y=..density..), alpha=0.5, 
                  position="identity")+
@@ -174,6 +176,7 @@ c <- ggplot(data_table, aes(x=harv, color=treat, fill=treat)) +
   scale_y_continuous(breaks = seq(0,0.005,0.001), limits = c(0,0.005)) + 
   ggtitle("Random Case")
 
+# Histogram with density plot for self-selection case, color by groups
 d <- ggplot(data_table_sel, aes(x=harv, color=treat, fill=treat)) + 
   geom_histogram(aes(y=..density..), alpha=0.5, 
                  position="identity")+
