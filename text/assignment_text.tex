@@ -43,9 +43,10 @@ Omitted variable bias $\Rightarrow$ control for all confounders, factors that de
 
 \section{Data Generation and Model Specification} \label{sec:data}
 
-In this experiment we consider a sample consisting of 10.000 observations. Each observation represents one individual agricultural household, indicated by the subscript $\textit{i}$. The outcome variable $\textit{harv}_i$ represents the amount harvested (kg) by individual $\textit{i}$. Our treatment $\textit{D}_i \in \{0,1\}$ is a binary variable that indicates whether individual $\textit{i}$ used the package of improved maize seeds and fertilizers or not. Therefore, $\textit{D}_i = 1$ means that the individual received the treatment and $\textit{D}_i = 0$ means no treatment. To control for other relevant variables, we collected the following covariates: $\textit{area}_i$ is the cultivated area with maize by farmer ($m^2$), which is uniformely distributed between 100 and 5000 square meters. $\textit{sun}_i$ is the sun-hours during growing period (h), which is uniformly distributed between 400 and 600 hours. $\textit{rain}_i$ is the total rainfall during growing period (mm), which is uniformly distributed between 600 and 850 millimetres. $\textit{child}_i$ is the number of children under 10 years, which is uniformly distributed between 0 and 5. This is relevant since more children affect the time that can be spend on the field. $\textit{exp}_i$ is the years of experience and is uniformly distributed between 1 and 35 years. $\textit{educ}_i$ is a binary variable indicating whether individual \textit{i} is able to write and read ($\textit{educ}_i = 1$) or not ($\textit{educ}_i = 0$). \\
-%income endogeneity problem?!
-%include married or partner/single and interaction term with children
+In this experiment we consider a sample consisting of 10.000 observations. Each observation represents one individual agricultural household, indicated by the subscript $\textit{i}$. The outcome variable $\textit{harv}_i$ represents the amount harvested (kg) by individual $\textit{i}$. Our treatment $\textit{D}_i \in \{0,1\}$ is a binary variable that indicates whether individual $\textit{i}$ used the package of improved maize seeds and fertilizers or not. Therefore, $\textit{D}_i = 1$ means that the individual received the treatment and $\textit{D}_i = 0$ means no treatment. To control for other relevant variables, we collected the following covariates: $\textit{area}_i$ is the cultivated area with maize by farmer ($m^2$), which is uniformely distributed between 100 and 5000 square meters. $\textit{sun}_i$ is the sun-hours during growing period (h), which is uniformly distributed between 400 and 600 hours. $\textit{rain}_i$ is the total rainfall during growing period (mm), which is uniformly distributed between 600 and 850 millimetres. $\textit{child}_i$ is the number of children under 10 years, which is uniformly distributed between 0 and 5. $\textit{exp}_i$ is the years of experience and is uniformly distributed between 1 and 35 years. $\textit{educ}_i$ is a binary variable indicating whether individual \textit{i} is able to write and read ($\textit{educ}_i = 1$) or not ($\textit{educ}_i = 0$). In this study, we assume that the variable $\textit{educ}_i$ is unobserved.\todo{I did not include soil quality yet!} \\
+
+%I excluded income since it would lead to an endogeneity problem?!
+%Could also include married or partner/single and interaction term with children
 
 
 %Cultivated area with maize (m2): $\textit{area}_i \sim$ U(100, 5000) \\
@@ -74,7 +75,7 @@ where $\textit{Y}_i$ is the outcome by individual, $\boldsymbol{\mu}(0) = \texti
 \end{equation}
   
 
-represents the causal effect of treatment for individual \textit{i}, which is composed of the common gain and the idiosyncratic gain. As indicated by Rubin(1970?) these potential outcomes by individual \textit{i} according to treatment can only be interpreted as causal effect, if the assignment between treatment and no treatment is random and there arises no selection bias such that we can compare outcomes of treated and untreated individuals with same characteristics as unobserved counterfactual. If we use this model in a regression we receive the following causal equation
+represents the causal effect of treatment for individual \textit{i}, which is composed of the common gain and the idiosyncratic gain. As indicated by \cite{imbens2015causal} these potential outcomes by individual \textit{i} according to treatment can only be interpreted as causal effect, if the assignment between treatment and no treatment is random and there arises no selection bias such that we can compare outcomes of treated and untreated individuals with same characteristics as unobserved counterfactual. If we use this model in a regression, we receive the following causal equation
 
 \begin{equation}
   \begin{aligned}
@@ -84,14 +85,14 @@ represents the causal effect of treatment for individual \textit{i}, which is co
   \end{aligned}
 \end{equation}
   
-which only holds if $\boldsymbol{E}\{\textit{D}_i\boldsymbol{\epsilon}_i\} \neq 0$, therefore we do not have exogeneity. Assuming we could observe all relevant covariates our regression of the true model would look the following
+which only holds if $\boldsymbol{E}\{\textit{D}_i\boldsymbol{\epsilon}_i\} \neq 0$, therefore we do not have exogeneity. Assuming we could observe all relevant covariates, our regression of the true model would look the following
 
 \begin{align}
 	\label{eq:eq4}
-	\textit{harv}_i &= 400 + 0.05 \textit{area}_i + 0.04 \textit{sun}_i + 0.03 \textit{rain}_i - 5 \textit{child}_i + 5 \textit{exp}_i + 10 \textit{educ}_i + 100 \textit{D}_i + \textit{e}_i.
+	\textit{harv}_i &= 400 + 0.05 \textit{area}_i + 0.04 \textit{sun}_i + 0.03 \textit{rain}_i - 5 \textit{child}_i + 5 \textit{exp}_i + 10 \textit{educ}_i + 100 \textit{D}_i + \textit{e}_i,
 \end{align}
 
-where $\textit{e}_i \sim \mathcal{N}(0,\,1)$. The coefficients are selected such that the data generated is reasonable in a stylized real life scenario. 
+where $\textit{e}_i \sim \mathcal{N}(0,\,1)$. The coefficients are chosen such that the data generated is reasonable in a stylized real life scenario. 
 
 
 \section{Assignment into Treatment} \label{sec:assignment}
@@ -109,11 +110,11 @@ Keeping the idiosyncratic treatment effect $\boldsymbol{\Delta}_i$ fixed, the as
     	\begin{cases}
       1 & \text{if $\textit{D}_i^\ast \geq$ 0}\\
       0 & \text{if $\textit{D}_i^\ast <$ 0}
-    	\end{cases} 
+    	\end{cases}. 
 \end{align}
 
 
-However, there are several reason, why the assignment into treatment could be not random. For example, we expect that the distance to the supply stations of a household decreases the probability to take the treatment. Education (can read/write) is supposed to have an influence on farmers evaluation regarding the effectiveness / advantage of improved seeds + fertilizer package. Thus, a better education (as read/write dummy) would increase the probability to take the treatment. Furthermore, the number of very young children (< 10 years) decreases the possibility to pick up the package and therefore decreases the probability to take the treatment. Therefore, the selection of treatment is not random. This leads to unbalanced characteristics of treated and untreated individuals. 
+However, there are several reason, why the assignment into treatment could be not random. For example, we expect that the distance to the supply stations of a household decreases the probability to take the treatment. Education (can read/write) is supposed to have an influence on farmers evaluation regarding the effectiveness / advantage of improved seeds + fertilizer package. Thus, a better education (as read/write dummy) would increase the probability to take the treatment. In this study, we assume that $\textit{educ}_i$ is unobserved. Furthermore, the number of very young children (< 10 years) decreases the possibility to pick up the package and therefore decreases the probability to take the treatment. Therefore, the selection of treatment is not random. This leads to unbalanced characteristics of treated and untreated individuals. The data generation in the self-selection case can be described as followed:
 
 %\begin{align}
 %	\label{eq:eq8}
@@ -128,7 +129,7 @@ However, there are several reason, why the assignment into treatment could be no
     \begin{cases}
       1 & \text{if $\textit{D}_i^\ast \geq$ 0}\\
       0 & \text{if $\textit{D}_i^\ast <$ 0}
-    \end{cases} 
+    \end{cases}. 
 \end{align}
 
 
@@ -161,7 +162,7 @@ harv & 677.25 & 752.78 & 651.75 &  & 978.75 & 624.12 &  \\
 \end{threeparttable}
 \end{table}
 
-If treatment was randomly assigned, there is no significant difference in the mean of the covariates for the treated and untreated sample. Thus, a random assignment would allow us to identify the causal treatment effect by calculating the differences in the mean for the outcome variable between treated and untreated sample. Taking a look at the p-values of the  unpaired two-samples t-test, we can see that the means of the covariates are mostly not significantly different from each other \todo{(why some of them still are?)}. However, in the self-selection case, we see that the variables $\textit{child}_i$, $\textit{educ}_i$, and $\textit{dist}_i$ are not balanced between treated and untreated sample and the p-values show that the means for those variables are highly significantly different from each other \todo{why also some other variable have low p-values?}. Since these variables have an effect on the outcome variable $\textit{harv}_i$, the distribution of the outcome variable looks different as we can observe in the density plots.
+If treatment was randomly assigned, there is no significant difference in the mean of the covariates for the treated and untreated sample. Thus, a random assignment would allow us to identify the causal treatment effect by calculating the differences in the mean for the outcome variable between treated and untreated sample. Taking a look at the p-values of the  unpaired two-samples t-test, we can see that the means of the covariates are mostly not significantly different from each other\todo{why some of them still are?}. However, in the self-selection case, we see that the variables $\textit{child}_i$, $\textit{educ}_i$, and $\textit{dist}_i$ are not balanced between treated and untreated sample and the p-values show that the means for those variables are highly significantly different from each other\todo{why also some other variable have low p-values?}. Since these variables have an effect on the outcome variable $\textit{harv}_i$, the distribution of the outcome variable looks different as we can observe in the density plots.
 
 \begin{figure}[htb]
 \begin{raggedleft}
@@ -188,8 +189,6 @@ At this point we assume that we do not know the data generating process for the 
 	\textit{harv}_i &= \boldsymbol{\beta}_0 + \boldsymbol{\beta}_1 \textit{area}_i + \boldsymbol{\beta}_2 \textit{sun}_i + \boldsymbol{\beta}_3 \textit{rain}_i - \boldsymbol{\beta}_4 \textit{child}_i + \boldsymbol{\beta}_5 \textit{exp}_i + \boldsymbol{\Delta}_i \textit{D}_i + \textit{e}_i.
 \end{align}
 
-In the case of random assignment we obtain the following results:
-
 \begin{table}[h!]
 \centering
 \begin{threeparttable}
@@ -210,7 +209,7 @@ In the case of random assignment we obtain the following results:
 \end{threeparttable}
 \end{table}
 
-The regression perfectly fits the data generating process and estimates the treatment effect correctly, even though the variable $\textit{educ}_i$ is left out, since it is balanced across the two treatment groups. In the case of the self-selection we obtain the following results:
+The regression perfectly fits the data generating process and estimates the treatment effect correctly, even though the unobsreved variable $\textit{educ}_i$ is left out, since it is balanced across the two treatment groups. In the case of the self-selection we obtain the following results:
 
 \begin{table}[h!]
 \centering
@@ -232,7 +231,7 @@ The regression perfectly fits the data generating process and estimates the trea
 \end{threeparttable}
 \end{table}
 
-Here, we can see a large bias. The treatment effect is estimated much larger than it is in real. This is due to the omitted variables leading to self-selection. For the variable $\textit{educ}_i$ we expect the OVB to be positive, since it correlates positive with the treatment and the output variable. 
+Here, we can see a large bias. The treatment effect is estimated much larger than it is in real. This is due to the omitted variables leading to self-selection. For the variable $\textit{educ}_i$ we expect the omitted variable bias to be positive, since it is positively correlated with the treatment and the output variable. 
 
 
 
@@ -269,10 +268,6 @@ where $\textit{v}_i \sim \mathcal{N}(0,\,1)$. This random assignment of the vouc
 
 
 \section{Difference in Difference} \label{sec:difference}
-
-Test citation:
-
-bla bla \cite{Foroni2011} bla bla. \\
 
 
 \clearpage

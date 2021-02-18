@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7) (preloaded format=pdflatex 2020.10.14)  18 FEB 2021 17:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.7) (preloaded format=pdflatex 2020.10.14)  18 FEB 2021 18:20
 entering extended mode
 **./assignment_text.tex
 (assignment_text.tex
@@ -1132,12 +1132,16 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 40.
 ("C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 46--49
+Underfull \hbox (badness 10000) in paragraph at lines 46--47
 
  []
 
-[2]
-Overfull \hbox (9.52554pt too wide) in paragraph at lines 144--162
+[2
+\pgfsyspdfmark {pgfid6}{24367470}{30994196}
+\pgfsyspdfmark {pgfid9}{36773952}{31009643}
+\pgfsyspdfmark {pgfid10}{38395967}{30762469}
+]
+Overfull \hbox (9.52554pt too wide) in paragraph at lines 145--163
  [] 
  []
 
@@ -1145,15 +1149,15 @@ Overfull \hbox (9.52554pt too wide) in paragraph at lines 144--162
 
 LaTeX Warning: Marginpar on page 4 moved.
 
-<../figures/density_total.pdf, id=96, 568.1225pt x 397.485pt>
+<../figures/density_total.pdf, id=100, 568.1225pt x 397.485pt>
 File: ../figures/density_total.pdf Graphic file (type pdf)
 <use ../figures/density_total.pdf>
-Package pdftex.def Info: ../figures/density_total.pdf  used on input line 168.
+Package pdftex.def Info: ../figures/density_total.pdf  used on input line 169.
 (pdftex.def)             Requested size: 455.24411pt x 318.52216pt.
-<../figures/density_goups.pdf, id=97, 568.1225pt x 397.485pt>
+<../figures/density_goups.pdf, id=101, 568.1225pt x 397.485pt>
 File: ../figures/density_goups.pdf Graphic file (type pdf)
 <use ../figures/density_goups.pdf>
-Package pdftex.def Info: ../figures/density_goups.pdf  used on input line 176.
+Package pdftex.def Info: ../figures/density_goups.pdf  used on input line 177.
 (pdftex.def)             Requested size: 455.24411pt x 318.52216pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1162,70 +1166,56 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [4
-\pgfsyspdfmark {pgfid6}{18344821}{47556252}
-\pgfsyspdfmark {pgfid9}{36773952}{47571699}
-\pgfsyspdfmark {pgfid10}{38395967}{47324525}
-\pgfsyspdfmark {pgfid11}{11691732}{44882382}
-\pgfsyspdfmark {pgfid14}{36773952}{42434121}
-\pgfsyspdfmark {pgfid15}{38395967}{42186947}
- <../figures/density_total.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 245--247
-
- []
-
-[5 <../figures/density_goups.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 275--276
+\pgfsyspdfmark {pgfid11}{18201890}{45773672}
+\pgfsyspdfmark {pgfid14}{36773952}{45789119}
+\pgfsyspdfmark {pgfid15}{38395967}{45541945}
+\pgfsyspdfmark {pgfid16}{11467581}{43099802}
+\pgfsyspdfmark {pgfid19}{36773952}{41766101}
+\pgfsyspdfmark {pgfid20}{38395967}{41518927}
+ <../figures/density_total.pdf>] [5 <../figures/density_goups.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 244--246
 
  []
 
 [6] (assignment_text.bbl) [7
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 287.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 287.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 282.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 282.
  (assignment_text.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 287.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 287.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 282.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 282.
+Package rerunfilecheck Info: File `assignment_text.out' has not changed.
+(rerunfilecheck)             Checksum: 0552AD2D617E66205BF99B8129504767;336.
 
-
-Package rerunfilecheck Warning: File `assignment_text.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `assignment_text.out':
-(rerunfilecheck)             Before: 85F5C4D25F8F3EF88FA87D264428380B;336
-(rerunfilecheck)             After:  DCAD661DAB3C1DCAB8F5018B8B9E9EAF;336.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 287.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 282.
  ) 
 Here is how much of TeX's memory you used:
- 23487 strings out of 481199
- 421850 string characters out of 2915339
- 701977 words of memory out of 3000000
- 38500 multiletter control sequences out of 15000+200000
+ 23495 strings out of 481199
+ 422076 string characters out of 2915339
+ 703982 words of memory out of 3000000
+ 38508 multiletter control sequences out of 15000+200000
  613239 words of font info for 76 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 70i,20n,85p,1550b,1031s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{section*.10} has been referenced but does not exi
-st, replaced by a fixed one
-
-{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTeX/
-fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm
--mathsy.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program F
-iles/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Program Files/MiKTeX/fonts/typ
-e1/public/lm/lmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx12.p
-fb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Program Files/
-MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/pu
-blic/lm/lmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmib10.pfb><C
-:/Program Files/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX
-/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm
-/lmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program 
-Files/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX/fonts/ty
-pe1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8.p
-fb>
-Output written on assignment_text.pdf (7 pages, 272187 bytes).
+ 70i,20n,85p,1609b,1027s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTe
+X/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/
+lm-mathsy.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program
+ Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Program Files/MiKTeX/fonts/t
+ype1/public/lm/lmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx12
+.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Program File
+s/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/
+public/lm/lmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmib10.pfb>
+<C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Program Files/MiKT
+eX/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/
+lm/lmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Progra
+m Files/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX/fonts/
+type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8
+.pfb>
+Output written on assignment_text.pdf (7 pages, 274056 bytes).
 PDF statistics:
  210 PDF objects out of 1000 (max. 8388607)
  43 named destinations out of 1000 (max. 500000)
