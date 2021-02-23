@@ -41,7 +41,7 @@ Omitted variable bias $\Rightarrow$ control for all confounders, factors that de
 
 \section{Data Generation and Model Specification} \label{sec:data}
 
-In this experiment we consider a sample consisting of 10.000 observations. Each observation represents one individual agricultural household, indicated by the subscript $\textit{i}$. The outcome variable $\textit{harv}_i$ represents the amount harvested (kg) by individual $\textit{i}$. Our treatment $\textit{D}_i \in \{0,1\}$ is a binary variable that indicates whether individual $\textit{i}$ used the package of improved maize seeds and fertilizers or not. Therefore, $\textit{D}_i = 1$ means that the individual received the treatment and $\textit{D}_i = 0$ means no treatment. To control for other relevant variables, we collected the following covariates: $\textit{area}_i$ is the cultivated area with maize by farmer ($m^2$), which is uniformely distributed between 100 and 5000 square meters. $\textit{sun}_i$ is the sun-hours during growing period (h), which is uniformly distributed between 400 and 600 hours. $\textit{rain}_i$ is the total rainfall during growing period (mm), which is uniformly distributed between 600 and 850 millimetres. $\textit{child}_i$ is the number of children under 10 years, which is uniformly distributed between 0 and 5. $\textit{exp}_i$ is the years of experience and is uniformly distributed between 1 and 35 years. $\textit{educ}_i$ is a binary variable indicating whether individual \textit{i} is able to write and read ($\textit{educ}_i = 1$) or not ($\textit{educ}_i = 0$). In this study, we assume that the variable $\textit{educ}_i$ is unobserved.\todo{I did not include soil quality yet!} \todo{SST: lets not include it.... otherwise I'll have to change everythinf accordingly :)}
+In this experiment we consider a sample consisting of 10.000 observations. Each observation represents one individual agricultural household, indicated by the subscript $\textit{i}$. The outcome variable $\textit{harv}_i$ represents the amount harvested (kg) by individual $\textit{i}$. Our treatment $\textit{D}_i \in \{0,1\}$ is a binary variable that indicates whether individual $\textit{i}$ used the package of improved maize seeds and fertilizers or not. Therefore, $\textit{D}_i = 1$ means that the individual received the treatment and $\textit{D}_i = 0$ means no treatment. To control for other relevant variables, we collected the following covariates: $\textit{area}_i$ is the cultivated area with maize by farmer ($m^2$), which is uniformely distributed between 100 and 5000 square meters. $\textit{sun}_i$ is the sun-hours during growing period (h), which is uniformly distributed between 400 and 600 hours. $\textit{rain}_i$ is the total rainfall during growing period (mm), which is uniformly distributed between 600 and 850 millimetres. $\textit{child}_i$ is the number of children under 10 years, which is uniformly distributed between 0 and 5. $\textit{exp}_i$ is the years of experience and is uniformly distributed between 1 and 35 years. $\textit{educ}_i$ is a binary variable indicating whether individual \textit{i} is able to write and read ($\textit{educ}_i = 1$) or not ($\textit{educ}_i = 0$). In this study, we assume that the variable $\textit{educ}_i$ is unobserved.
 
 %I excluded income since it would lead to an endogeneity problem?!
 %Could also include married or partner/single and interaction term with children
@@ -142,7 +142,7 @@ harv & 677.25 & 752.78 & 651.75 &  & 978.75 & 624.12 &  \\
    \hline
 \end{tabular}
 \end{threeparttable}
-Notes: ..............
+\footnotesize{Notes: In the table are the mean values of the variables for the different assignment and treatment groups. \textit{Obs} denotes the number of observations. P-Values are calculated with an unpaired two-samples t-test.}
 \end{table}
 
 If treatment was randomly assigned, there is no significant difference in the mean of the covariates for the treated and untreated sample. Thus, a random assignment would allow us to identify the causal treatment effect by calculating the differences in the mean for the outcome variable between treated and untreated sample. Taking a look at the p-values of the  unpaired two-samples t-test, we can see that the means of the covariates are mostly not significantly different from each other\todo{why some of them still are?}. However, in the self-selection case, we see that the variables $\textit{child}_i$, $\textit{educ}_i$, and $\textit{dist}_i$ are not balanced between treated and untreated sample and the p-values show that the means for those variables are highly significantly different from each other\todo{why also some other variable have low p-values?}. Since these variables have an effect on the outcome variable $\textit{harv}_i$, the distribution of the outcome variable looks different as we can observe in the density plots.
@@ -152,6 +152,7 @@ If treatment was randomly assigned, there is no significant difference in the me
 \includegraphics[width=\linewidth]{../figures/density_total.pdf}
 \caption{Density function}
 \label{fig:density}
+\footnotesize{Notes: Density function of the variable \textit{harv} for the two assignments.}
 \end{raggedleft}
 \end{figure}
 
@@ -160,6 +161,7 @@ If treatment was randomly assigned, there is no significant difference in the me
 \includegraphics[width=\linewidth]{../figures/density_goups.pdf}
 \caption{Density function grouped by treatment}
 \label{fig:density_groups}
+\footnotesize{Notes: Density function of the variable \textit{harv} for the two assignments and treatments.}
 \end{raggedleft}
 \end{figure}
 
@@ -248,7 +250,7 @@ where $\textit{v}_i \sim \mathcal{N}(0,\,1)$. This random assignment of the vouc
 
 % -------------- part 5a
 
-In a next step, we generate five repeated cross sections form 2000 until 2004 using a similar data generating process as above. For convenience, we now use $n=100$ households. The variables $area, educ,$ and $dist$ are held constant in time. For the variable $child$, we assume that each year, the number of children below the age of 10 either increases or decreases by one, each with probability $\nicefrac{1}{6}$.\footnote{An increase in the number of children below the age of 10 is associated with a newborn child. A decrease is due to children turning 10 or dying.} The variables related to weather conditions, $rain$ and $sun$ are redrawn for each year, i.e., we assume that there are no weather trends and that each households faces a similar climate. Further. we assume no harvest worker dies during the five year period, assuring that experience $exp$ grows linearly. In the beginning of 2003, the vouchers for the seed and fertilizer package are distributed and we assume that each household receiving a voucher decides whether or not to take up the offer for the ongoing and the next year.
+In a next step, we generate five repeated cross sections from 2000 until 2004 using a similar data generating process as above. For convenience, we now use $n=100$ households. The variables $area, educ,$ and $dist$ are held constant in time. For the variable $child$, we assume that each year, the number of children below the age of 10 either increases or decreases by one, each with probability $\nicefrac{1}{6}$.\footnote{An increase in the number of children below the age of 10 is associated with a newborn child. A decrease is due to children turning 10 or dying.} The variables related to weather conditions, $rain$ and $sun$ are redrawn for each year, i.e., we assume that there are no weather trends and that each households faces a similar climate. Further. we assume no harvest worker dies during the five year period, assuring that experience $exp$ grows linearly. In the beginning of 2003, the vouchers for the seed and fertilizer package are distributed and we assume that each household receiving a voucher decides whether or not to take up the offer for the ongoing and the next year.
 
 
 Figure \ref{fig:did_a} shows the harvest output of the treatment and the control groups. The treatment group comprises all households that received a voucher in 2003 and subsequently took up the offer. The control group consists of all remaining households. Notably, before the start of the treatment, the mean size of the harvest is different in the two groups due to self-selection. Yet, mean harvest moves in tandem, indicating that the parallel trend assumption is fulfilled. From 2003 onward, the harvest of the treated group experiences a level shift by about 300kg. In the control group, the same time trend as before continues.
@@ -317,7 +319,7 @@ In order to explore the dynamics of the treatment effect, we extend \eqref{eq:eq
 	\label{eq:eq7did_event}
 	harv_{i,t} &= \alpha_i + \tau_t + \sum_{\substack{k\in  \{2000,2001, \\2003,2004\}}}\delta_k D_{i} T_k + X_{i,t}'\beta + \epsilon_{i,t}.
 \end{align}
-The coefficients $\delta_k$ represent the treatment effect relative to the effect in 2002. They are plotted in Figure \ref{fig:did_c}. The whiskers represent 90\% confidence intervals. As expected, prior to treatment, there is no significant effect. Once the the seed and fertilizer became available to the treatment group in 2003, their harvest increased by 300kg.
+The coefficients $\delta_k$ represent the treatment effect relative to the effect in 2002. They are plotted in Figure \ref{fig:did_c}. The whiskers represent 90\% confidence intervals. As expected, prior to treatment, there is no significant effect. Once the seed and fertilizer became available to the treatment group in 2003, their harvest increased by 300kg.
 
 
 \begin{figure}[htb]
